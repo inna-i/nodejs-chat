@@ -1,0 +1,59 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-stage-0": "^7.8.3",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "kafka-node": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.1.0"
+  },
+  "scripts": {
+    "start:client": "webpack-dev-server --config webpack.devserv.js",
+    "start:server": "nodemon index.js port=8081",
+    "webpack:server": "webpack --config webpack.server.js --watch",
+    "webpack:client": "webpack --config webpack.client.js --watch",
+    "build:client": "webpack --config webpack.client.js",
+    "build:server": "webpack --config webpack.server.js",
+    "build": "npm-run-all --parallel build:*",
+    "dev": "npm-run-all --parallel start:*",
+    "removeDockerImage": "docker rmi --force localhost:32000/node-web-app:latest",
+    "buildDocker": "docker build -t localhost:32000/node-web-app:latest . --no-cache",
+    "pushDocker": "docker push localhost:32000/node-web-app",
+    "runDocker": "docker run -p 49160:8080 -d localhost:32000/node-web-app:latest",
+    "cleanContainersDocker": "docker rm -f $(docker ps -a -q)",
+    "helm_kafka": "helm install --name my-kafka --namespace kafka -f 100-helm-k.yaml incubator/kafka",
+    "k8s_proxy_trefik": "sudo microk8s kubectl port-forward --address 0.0.0.0 service/traefik 8000:8000 8080:8080 443:4443 -n default"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.2.0",
+    "nodemon": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  }
+}
