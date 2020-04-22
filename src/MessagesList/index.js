@@ -39,7 +39,7 @@ const Name = styled.span`
 	font-weight: 600;
     font-style: italic;
     font-size: 12px;
-    color: #f4f2e7;
+	color: ${props => props.isOnline ? '#f4f2e7' : 'grey'}
 `;
 
 const time = new Date();
@@ -51,9 +51,11 @@ function MessagesList(props) {
 			if (!m.user) {
 				return (<Welcome> Welcome {m.msg}</Welcome>)
 			}
+			const isOnline = props.activeUsers.includes(m.user);
 			return (
 				<ChatMessage key={i}> 
-					<Time>{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</Time><Name>{m.user}</Name> 
+					<Time>{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</Time>
+					<Name isOnline={isOnline}>{m.user + (isOnline ? '' : '[offline]')}</Name> 
 					<Message currentUser={props.userId === m.user}>{m.msg}</Message>
 				</ChatMessage>
 			)

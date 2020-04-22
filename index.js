@@ -67,6 +67,7 @@ const chat = io.of("/api/chat").on("connection", (socket) => {
 	const nick = randomLogin();
 	map.set(socket.id, nick);
 	socket.emit("message", { msg: "#" + nick, currUserId: nick });
+	chat.emit("activeUsers", Array.from(map.values()));
 
 	socket.on("message", (msg) => {
 		console.log("message: " + msg);
@@ -75,6 +76,7 @@ const chat = io.of("/api/chat").on("connection", (socket) => {
 
 	socket.on("disconnect", () => {
 		map.delete(socket.id);
+		chat.emit("activeUsers", Array.from(map.values()));
 		console.log("Client disconnected");
 	});
 });

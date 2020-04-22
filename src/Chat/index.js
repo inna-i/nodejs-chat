@@ -73,6 +73,7 @@ const Chat = () => {
 	const [userId, setUserId] = useState(null);
 	const el = useRef(null);
 	const [status, setStatus] = useState('offline');
+	const [activeUsers, setActiveUsers] = useState([]);
   
 	useEffect(() => {
 	  const chat = socketIOClient("/api/chat");
@@ -82,6 +83,11 @@ const Chat = () => {
 	  chat.on("connect", () => {
 		console.log("connected");
 		setStatus('online');
+	  });
+
+	  chat.on("activeUsers", users => {
+		  console.log('users', users)
+		  setActiveUsers(users)
 	  });
   
 	  chat.on("message", (m) => {
@@ -104,7 +110,7 @@ const Chat = () => {
 	  <ChatContainer>
 		<Status status={status}>{status}</Status>
 		<H1>NWSD</H1>
-		<MessagesList el={el} messages={messages} userId={userId} />
+		<MessagesList el={el} messages={messages} userId={userId} activeUsers={activeUsers} />
 		<Form
 			onSubmit={e => {
 				e.preventDefault();
