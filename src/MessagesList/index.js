@@ -25,7 +25,7 @@ const Message = styled.div`
     width: calc(100% - 60px);
     border-radius: 4px;
     color: #afeaa1;
-    background: ${props => props.currentUser ? 'red': '#2f313d'};
+    background: ${props => props.currentUser ? '#3c4556': '#2f313d'};
 `;
 
 const Time = styled.span`

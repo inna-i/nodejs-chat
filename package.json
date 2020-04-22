@@ -36,7 +36,7 @@
     "removeDockerImage": "docker rmi --force localhost:32000/node-web-app:latest",
     "buildDocker": "docker build -t localhost:32000/node-web-app:latest . --no-cache",
     "pushDocker": "docker push localhost:32000/node-web-app",
-    "runDocker": "docker run -p 49160:8080 -d localhost:32000/node-web-app:latest",
+    "runDocker": "docker run -p 3030:8080 -d localhost:32000/node-web-app:latest",
     "cleanContainersDocker": "docker rm -f $(docker ps -a -q)",
     "helm_kafka": "helm install --name my-kafka --namespace kafka -f 100-helm-k.yaml incubator/kafka",
     "k8s_proxy_trefik": "sudo microk8s kubectl port-forward --address 0.0.0.0 service/traefik 8000:8000 8080:8080 443:4443 -n default"
