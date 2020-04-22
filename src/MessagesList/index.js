@@ -46,7 +46,7 @@ const time = new Date();
 
 function MessagesList(props) {
 	return (		
-		<ChatMessagesList>
+		<ChatMessagesList ref={props.el}>
 		{ props.messages.map((m, i) => {
 			if (!m.user) {
 				return (<Welcome> Welcome {m.msg}</Welcome>)

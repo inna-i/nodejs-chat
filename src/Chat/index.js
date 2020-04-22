@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import socketIOClient from "socket.io-client";
 
@@ -61,6 +61,7 @@ const Chat = () => {
 	const [value, setValue] = useState("");
 	const [io, setIo] = useState(null);
 	const [userId, setUserId] = useState(null);
+	const el = useRef(null);
   
 	useEffect(() => {
 	  const chat = socketIOClient("/api/chat");
@@ -77,6 +78,10 @@ const Chat = () => {
 		}
 
 		setMessages((d) => d.concat(m));
+		if(el.current) {
+			console.log(el)
+			el.current.scrollTop = el.current.scrollHeight;
+		}
 	  });
   
 	  return () => chat.disconnect();
@@ -86,7 +91,7 @@ const Chat = () => {
 	return (
 	  <ChatContainer>
 		<H1>NWSD</H1>
-		<MessagesList messages={messages} userId={userId} />
+		<MessagesList el={el} messages={messages} userId={userId} />
 		<Form
 			onSubmit={e => {
 				e.preventDefault();
