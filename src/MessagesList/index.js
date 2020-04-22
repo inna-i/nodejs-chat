@@ -39,7 +39,7 @@ const Name = styled.span`
 	font-weight: 600;
     font-style: italic;
     font-size: 12px;
-	color: ${props => props.isOnline ? '#f4f2e7' : 'grey'}
+	color: ${props => props.isOnline ? '#f4f2e7' : 'grey'};
 `;
 
 const time = new Date();
