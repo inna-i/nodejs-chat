@@ -66,7 +66,7 @@ const map = new Map();
 const chat = io.of("/api/chat").on("connection", (socket) => {
 	const nick = randomLogin();
 	map.set(socket.id, nick);
-	socket.emit("message", { msg: "#" + nick });
+	socket.emit("message", { msg: "#" + nick, currUserId: nick });
 
 	socket.on("message", (msg) => {
 		console.log("message: " + msg);

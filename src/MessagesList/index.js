@@ -25,7 +25,7 @@ const Message = styled.div`
     width: calc(100% - 60px);
     border-radius: 4px;
     color: #afeaa1;
-    background: #2f313d;
+    background: ${props => props.currentUser ? 'red': '#2f313d'};
 `;
 
 const Time = styled.span`
@@ -54,7 +54,7 @@ function MessagesList(props) {
 			return (
 				<ChatMessage key={i}> 
 					<Time>{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</Time><Name>{m.user}</Name> 
-					<Message>{m.msg}</Message>
+					<Message currentUser={props.userId === m.user}>{m.msg}</Message>
 				</ChatMessage>
 			)
 		})}			

@@ -60,6 +60,7 @@ const Chat = () => {
 	const [messages, setMessages] = useState([]);
 	const [value, setValue] = useState("");
 	const [io, setIo] = useState(null);
+	const [userId, setUserId] = useState(null);
   
 	useEffect(() => {
 	  const chat = socketIOClient("/api/chat");
@@ -71,6 +72,10 @@ const Chat = () => {
 	  });
   
 	  chat.on("message", (m) => {
+		if(m.currUserId) {
+			setUserId(m.currUserId);
+		}
+
 		setMessages((d) => d.concat(m));
 	  });
   
@@ -81,7 +86,7 @@ const Chat = () => {
 	return (
 	  <ChatContainer>
 		<H1>NWSD</H1>
-		<MessagesList messages={messages} />
+		<MessagesList messages={messages} userId={userId} />
 		<Form
 			onSubmit={e => {
 				e.preventDefault();
