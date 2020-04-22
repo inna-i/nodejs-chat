@@ -49,7 +49,7 @@ function MessagesList(props) {
 		<ChatMessagesList ref={props.el}>
 		{ props.messages.map((m, i) => {
 			if (!m.user) {
-				return (<Welcome> Welcome {m.msg}</Welcome>)
+				return (<Welcome> {m.msg}</Welcome>)
 			}
 			const isOnline = props.activeUsers.includes(m.user);
 			return (
