@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import socketIOClient from "socket.io-client";
+import socketIOClient from 'socket.io-client';
 
 import MessagesList from '../MessagesList';
 
@@ -33,7 +33,7 @@ const Form = styled.form`
 	margin: 20px 30px;
 
 	&::before {
-		content: "~msg$:";
+		content: '~msg$:';
 		position: absolute;
 		left: 14px;
 		top: 11px;
@@ -42,7 +42,7 @@ const Form = styled.form`
 	}
 	
 	&::after {
-		content: "↵";
+		content: '↵';
 		position: absolute;
 		right: 20px;
 		top: 0px;
@@ -68,29 +68,29 @@ const Input = styled.input`
 
 const Chat = () => {
 	const [messages, setMessages] = useState([]);
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState('');
 	const [io, setIo] = useState(null);
 	const [userId, setUserId] = useState(null);
-	const el = useRef(null);
 	const [status, setStatus] = useState('offline');
 	const [activeUsers, setActiveUsers] = useState([]);
+	const el = useRef(null);
   
 	useEffect(() => {
-	  const chat = socketIOClient("/api/chat");
+	  const chat = socketIOClient('/api/chat');
   
 	  setIo(chat);
   
-	  chat.on("connect", () => {
-		console.log("connected");
+	  chat.on('connect', () => {
+		console.log('connected');
 		setStatus('online');
 	  });
 
-	  chat.on("activeUsers", users => {
+	  chat.on('activeUsers', users => {
 		  console.log('users', users)
 		  setActiveUsers(users)
 	  });
   
-	  chat.on("message", (m) => {
+	  chat.on('message', (m) => {
 		if (m.currUserId) {
 			setUserId(m.currUserId);
 		}
@@ -115,8 +115,8 @@ const Chat = () => {
 			onSubmit={e => {
 				e.preventDefault();
 				if (value !== '') {
-					io.emit("message", value);
-					setValue("");
+					io.emit('message', value);
+					setValue('');
 				}
 			}}
 		>

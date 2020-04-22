@@ -74,7 +74,12 @@ const chat = io.of("/api/chat").on("connection", (socket) => {
 
 	socket.on("message", (msg) => {
 		console.log("message: " + msg);
-		chat.emit("message", { msg, user: map.get(socket.id) });
+	
+		const time = new Date();
+		chat.emit("message", {
+			msg,
+			user: map.get(socket.id),
+			time: `${time.getHours()}:${time.getMinutes()}` });
 	});
 
 	socket.on("disconnect", () => {

@@ -55,7 +55,6 @@ const Name = styled.span`
 	}
 `;
 
-const time = new Date();
 
 function MessagesList(props) {
 	return (		
@@ -67,7 +66,7 @@ function MessagesList(props) {
 			const isOnline = props.activeUsers.includes(m.user);
 			return (
 				<ChatMessage key={i}> 
-					<Time>{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</Time>
+					<Time>{m.time}</Time>
 					<Name isOnline={isOnline}>{m.user}</Name> 
 					<Message currentUser={props.userId === m.user}>{m.msg}</Message>
 				</ChatMessage>

@@ -9,7 +9,6 @@ const config = {
     historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:8081',
-      //'/socket.io': 'http://localhost:8081',
       '/socket.io': {
         target: 'http://localhost:8081',
         ws: true
