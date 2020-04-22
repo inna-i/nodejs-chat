@@ -10,6 +10,16 @@ const H1 = styled.h1`
 	letter-spacing: 10px;
 `;
 
+const Status = styled.div`
+	position: fixed;
+    right: 20px;
+    top: 20px;
+    padding: 3px 10px;
+    border-radius: 5px;
+	font-size: 13px;
+	background: ${props => props.status === 'online' ? '#6fb472': '#F06292'};
+`;
+
 const ChatContainer = styled.div`
 	color: #fbfbef;
 	font-family: 'Consolas', monospace;  
@@ -61,6 +71,7 @@ const Chat = () => {
 	const [value, setValue] = useState("");
 	const [io, setIo] = useState(null);
 	const [userId, setUserId] = useState(null);
+	const [status, setStatus] = useState('offline');
   
 	useEffect(() => {
 	  const chat = socketIOClient("/api/chat");
@@ -69,10 +80,11 @@ const Chat = () => {
   
 	  chat.on("connect", () => {
 		console.log("connected");
+		setStatus('online');
 	  });
   
 	  chat.on("message", (m) => {
-		if(m.currUserId) {
+		if (m.currUserId) {
 			setUserId(m.currUserId);
 		}
 
@@ -85,6 +97,7 @@ const Chat = () => {
 	
 	return (
 	  <ChatContainer>
+		<Status status={status}>{status}</Status>
 		<H1>NWSD</H1>
 		<MessagesList messages={messages} userId={userId} />
 		<Form
