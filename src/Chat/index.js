@@ -114,8 +114,10 @@ const Chat = () => {
 		<Form
 			onSubmit={e => {
 				e.preventDefault();
-				io.emit("message", value);
-				setValue("");
+				if (value !== '') {
+					io.emit("message", value);
+					setValue("");
+				}
 			}}
 		>
 			<Input

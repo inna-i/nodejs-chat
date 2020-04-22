@@ -36,10 +36,23 @@ const Time = styled.span`
 `;
 
 const Name = styled.span`
+	display: inline-block;
+	position: relative;
 	font-weight: 600;
     font-style: italic;
     font-size: 12px;
-	color: ${props => props.isOnline ? '#f4f2e7' : 'grey'}
+	color: ${props => props.isOnline ? '#f4f2e7' : 'grey'};
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 2px;
+		right: -14px;
+		width: 10px;
+		height: 10px;
+		border-radius: 10px;
+		background: ${props => props.isOnline ? '#6fb472' : 'grey'};
+	}
 `;
 
 const time = new Date();
@@ -55,7 +68,7 @@ function MessagesList(props) {
 			return (
 				<ChatMessage key={i}> 
 					<Time>{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</Time>
-					<Name isOnline={isOnline}>{m.user + (isOnline ? '' : '[offline]')}</Name> 
+					<Name isOnline={isOnline}>{m.user}</Name> 
 					<Message currentUser={props.userId === m.user}>{m.msg}</Message>
 				</ChatMessage>
 			)
