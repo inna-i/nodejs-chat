@@ -39,7 +39,7 @@
     "runDocker": "docker run -p 3030:8080 -d localhost:32000/node-web-app:latest",
     "cleanContainersDocker": "docker rm -f $(docker ps -a -q)",
     "helm_kafka": "helm install --name my-kafka --namespace kafka -f 100-helm-k.yaml incubator/kafka",
-    "k8s_proxy_trefik": "sudo microk8s kubectl port-forward --address 0.0.0.0 service/traefik 8000:8000 8080:8080 443:4443 -n default"
+    "k8s_proxy_traefik": "sudo microk8s kubectl port-forward --address 0.0.0.0 service/traefik 8000:8000 8080:8080 443:4443 -n default"
   },
   "devDependencies": {
     "html-webpack-plugin": "^4.2.0",
