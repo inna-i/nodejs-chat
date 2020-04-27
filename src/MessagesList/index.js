@@ -61,11 +61,11 @@ function MessagesList(props) {
 		<ChatMessagesList ref={props.el}>
 		{ props.messages.map((m, i) => {
 			if (!m.user) {
-				return (<Welcome> {m.msg}</Welcome>)
+				return (<Welcome key={i}> {m.msg}</Welcome>)
 			}
 			const isOnline = props.activeUsers.includes(m.user);
 			return (
-				<ChatMessage key={i}> 
+				<ChatMessage key={i + m.user}> 
 					<Time>{m.time}</Time>
 					<Name isOnline={isOnline}>{m.user}</Name> 
 					<Message currentUser={props.userId === m.user}>{m.msg}</Message>

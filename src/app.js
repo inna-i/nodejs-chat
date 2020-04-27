@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router";
 import { createGlobalStyle } from "styled-components";
 
 import Chat from './Chat';
-import Ping from './Ping';
+import Info from './Info';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -31,8 +31,8 @@ const GlobalStyle = createGlobalStyle`
 const App = () => [
 	<GlobalStyle key="global-style" />,
 	<Switch key="router">
-		<Route exact path="/" render={(props) => <Ping />} />
-		<Route path="/chat" render={(props) => <Chat />} />
+		<Route exact path="/" render={(props) => <Chat />} />
+		<Route path="/info" render={(props) => <Info />} />
 	</Switch>,
 ];
 
