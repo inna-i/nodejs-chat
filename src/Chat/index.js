@@ -105,6 +105,11 @@ const Chat = () => {
       setActiveUsers((u) => u.filter((name) => name !== user));
     });
 
+    chat.on("activeUsers", (users) => {
+      console.log('activeUsers', users);
+      setActiveUsers((u) => Array.from(users));
+    });
+
     chat.on("message", (m) => {
       if (m.currUserId) {
         setUserId(m.currUserId);

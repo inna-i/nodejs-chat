@@ -15,6 +15,7 @@
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "kafka-node": "^5.0.0",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
@@ -27,8 +28,8 @@
   },
   "scripts": {
     "start:client": "webpack-dev-server --config webpack.devserv.js",
-    "start:server": "nodemon index.js port=8081",
-    "webpack:server": "webpack --config webpack.server.js --watch",
+    "start:server": "KAFKA_ENABLED=true nodemon build/server.js port=8081",
+    "start:webpack_server": "webpack --config webpack.server.js --watch",
     "webpack:client": "webpack --config webpack.client.js --watch",
     "build:client": "webpack --config webpack.client.js",
     "build:server": "webpack --config webpack.server.js",
