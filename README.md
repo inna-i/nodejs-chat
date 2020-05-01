@@ -11,3 +11,5 @@ To build docker image:
 
 To start docker container:
 `yarn runDocker`
+
+Please find Kubernetes project here: https://github.com/vyshkov/scaling-nwsd-chat
