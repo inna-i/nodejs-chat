@@ -20,7 +20,7 @@ function setupProducerAndConsumer(emitter) {
         {
             kafkaHost, // connect directly to kafka broker (instantiates a KafkaClient)
             groupId: process.env.HOSTNAME || 'ExampleTestGroup',
-            sessionTimeout: 15000,
+            sessionTimeout: 6000,
             // An array of partition assignment protocols ordered by preference.
             // 'roundrobin' or 'range' string for built ins (see below to pass in custom assignment protocol)
             protocol: ['roundrobin'],
@@ -56,7 +56,9 @@ function enableKafka(io) {
     console.log('Enabling kafka...');
     const emitter = new EventEmitter();
     setupProducerAndConsumer(emitter);
-    io.adapter((nsp) => new KafkaAdapter(nsp, { emitter }));
+    io.adapter(function (nsp) {
+        return new KafkaAdapter(nsp, { emitter });
+    });
     return emitter;
 }
 

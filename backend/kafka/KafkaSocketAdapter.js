@@ -10,6 +10,7 @@ function get(str) {
 
 class KafkaAdapter extends Adapter {
     constructor(nsp, opts) {
+        console.log('exec const')
         super(nsp);
         this.emitter = opts.emitter;
         this.emitter.on('kafkaIncome', (message) => {

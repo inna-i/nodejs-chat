@@ -1,5 +1,6 @@
 FROM mhart/alpine-node:12
 
+RUN apk add g++ make python
 # создание директории приложения
 WORKDIR /usr/src/app
 

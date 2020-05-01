@@ -1,8 +1,10 @@
 const express = require('express');
-const defaultPort = 8080;
 const path = require('path');
-const enableKafka = require('./kafka/index');
 const get = require('lodash/get');
+const enableKafka = require('./backend/kafka/index');
+const randomLogin = require('./backend/nicknames/generator');
+
+const defaultPort = 8080;
 
 function getPort() {
     return (
@@ -23,45 +25,6 @@ const io = require('socket.io')(server);
 app.use(express.static('build/public'));
 
 app.get('/api', (req, res) => res.json(process.env)); // test rest api
-
-function random(limit) {
-    return Math.floor(Math.random() * (limit + 1));
-}
-
-function randomLogin() {
-    const zero = ['', '', '', '', 'Extremly', 'Really', 'So', 'Not'];
-    const one = [
-        'Funny',
-        'Stinky',
-        'Happy',
-        'Weird',
-        'Successful',
-        'Giant',
-        'Lucky',
-        'Extreme',
-        'Pretty',
-        'Supreme',
-        'Holly',
-    ];
-    const two = [
-        'Cow',
-        'Bacon',
-        'Parrot',
-        'Hamster',
-        'Arnold',
-        'Cat',
-        'Pirate',
-        'Hacker',
-        'Gnome',
-        'Eminem',
-    ];
-    return (
-        zero[random(zero.length - 1)] +
-        one[random(one.length - 1)] +
-        two[random(two.length - 1)] +
-        random(100)
-    );
-}
 
 // as we don't have separate persistance service (like redis) we have to introduce local state <- which is not good. 
 // With stateless services everything is simpler!
@@ -86,7 +49,7 @@ const chat = io.of('/api/chat').on('connection', (socket) => {
     set.add(nick);
     socket.emit('message', { msg: 'Welcome #' + nick, currUserId: nick });
     socket.emit('activeUsers', Array.from(set));
-    socket.broadcast.emit('message', { msg: nick + ' connected chat' });
+    socket.broadcast.emit('message', { msg: nick + ' connected to the chat' });
 
     chat.emit('userConnected', nick);
 
@@ -102,6 +65,7 @@ const chat = io.of('/api/chat').on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
+        set.delete(nick);
         chat.emit('userDisconnected', nick);
         chat.emit('message', { msg: '~ ' + nick + ' disconnected' });
         console.log('Client disconnected');
