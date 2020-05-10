@@ -16,7 +16,7 @@ function getPort() {
 }
 
 const port = getPort(); // should be possible to overide the port via console arg
-const v = 10; // indicating app version from kubernetes logs
+const v = 11; // indicating app version from kubernetes logs
 
 const app = express();
 const server = require('http').Server(app);
@@ -43,9 +43,29 @@ if (process.env.KAFKA_ENABLED === 'true') {
     })
 }
 
+function getUserName(socket) {
+    const cookie = get(socket, 'handshake.headers.cookie', '');
+    const check = cookie.split(/\s*;\s*/).find(c => c.startsWith('check'));
+    if (!check) {
+        return randomLogin()
+    }
+
+    const parts = check.split('^');
+    if (!parts.length === 2) {
+        return randomLogin();
+    }
+
+    const userData = parts[1].split('|');
+    if (!userData.length === 4) {
+        return randomLogin();
+    }
+
+    return decodeURIComponent(userData[1]) + '_' + decodeURIComponent(userData[2]) + ' (' + userData[0] + ')'
+}
+
 /** Chat Websocket logic is here */
 const chat = io.of('/api/chat').on('connection', (socket) => {
-    const nick = randomLogin();
+    const nick = getUserName(socket);
     set.add(nick);
     socket.emit('message', { msg: 'Welcome #' + nick, currUserId: nick });
     socket.emit('activeUsers', Array.from(set));
