@@ -48,7 +48,7 @@
     "dockerLogin": "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin",
     "dockerTag": "docker tag localhost:32000/node-web-app iivashchuk/node-web-app:latest",
     "dockerPush": "docker push $DOCKER_USERNAME/node-web-app:latest",
-    "pushToDockerHub": "npm run dockerLoginLocal && npm run dockerTag && npm run dockerPush",
+    "pushToDockerHub": "npm run dockerLogin && npm run dockerTag && npm run dockerPush",
     "helm_kafka": "helm install --name my-kafka --namespace kafka -f 100-helm-k.yaml incubator/kafka",
     "k8s_proxy_traefik": "sudo microk8s kubectl port-forward --address 0.0.0.0 service/traefik 8000:8000 8080:8080 443:4443 -n default"
   },
