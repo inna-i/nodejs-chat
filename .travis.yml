@@ -14,16 +14,13 @@ install:
 # tasks
 scripts: 
     - npm run lint
+    - npm run buildDocker
+    - npm run dockerLogin
+    - npm run dockerTag
     
 
 deploy:
     provider: script
-    script: 
-        - npm run buildDocker
-    script:
-        - npm run dockerLogin
-    script:
-        - npm run dockerTag
     script:
         - npm run dockerPush
     # on:
