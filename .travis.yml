@@ -30,11 +30,11 @@ cache: npm
 jobs:
   include:
     - name: Run lint
-      script: npm run lint
-      
+      script: yarn lint
+
     - name: Build Docker image
-      script: npm run buildDocker
+      script: yarn buildDocker
 
     - name: push to Docker Hub
       if: (type = push AND branch = master)
-      script: npm run pushToDockerHub
+      script: yarn dockerLogin && yarn dockerTag && yarn dockerPush
