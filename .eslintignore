@@ -1,0 +1,10 @@
+ 
+**/*.scss
+**/*.json
+**/*.png
+**/*.woff
+**/*.js.snap
+**/*.ico
+**/*.md
+webpack.config.js
+index.html

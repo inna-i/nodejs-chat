@@ -1,0 +1,20 @@
+# language
+language: node_js
+node_js: 12.16.3
+cache: npm
+
+branches:
+    only:
+    - master
+
+# installation
+install: 
+    npm install
+
+# tasks
+scripts: 
+    npm run lint
+    npm run buildDocker
+    npm run dockerLogin
+    npm run dockerTag
+    npm run dockerPush
