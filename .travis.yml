@@ -2,17 +2,16 @@
 
 # specify programming language
 language: node_js
-node_js: 10.15.0
+node_js: 12.16.3
 cache: npm
 
 # installation phase
 install:
-  - npm i
+  - npm install
 
 # tasks phase
 script:
   - npm run lint
   - npm run buildDocker
-  - if [ "$TRAVIS_BRANCH" = "master" | "TRAVIS_PULL_REQUEST" = "false" ]; then npm run dockerLogin; fi
-  - if [ "$TRAVIS_BRANCH" = "master" | "TRAVIS_PULL_REQUEST" = "false" ]; then 
-  npm run dockerTag && npm run dockerPush; fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm; then npm run pushToDockerHub; fi
+  
