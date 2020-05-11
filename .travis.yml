@@ -18,10 +18,13 @@ scripts:
 
 deploy:
     provider: script
-    scripts: 
+    script: 
         - npm run buildDocker
+    script:
         - npm run dockerLogin
+    script:
         - npm run dockerTag
+    script:
         - npm run dockerPush
-    on:
-        branch: master
+    # on:
+    #     branch: master
