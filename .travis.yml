@@ -14,19 +14,14 @@ install:
 # tasks
 scripts: 
     - npm run lint
-    - npm run buildDocker
-    - npm run dockerLogin
-    - npm run dockerTag
-    - npm run dockerPush
     
-   
-# jobs:
-#     include:
-#         - stage: build docker image
-#         script:
-#             - npm run buildDocker
-#         - stage: push image
-#         script:  
-#             - npm run dockerLogin
-#             - npm run dockerTag
-#             - npm run dockerPush
+
+deploy:
+    provider: script
+    script: 
+        - npm run buildDocker
+        - npm run dockerLogin
+        - npm run dockerTag
+        - npm run dockerPush
+    on:
+        branch: master
