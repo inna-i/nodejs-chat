@@ -14,9 +14,10 @@ jobs:
     - stage: build
         script: npm run buildDocker
     - stage: deploy
-        script: npm run dockerLogin
-        script: npm run dockerTag
-        script: npm run dockerPush
+        scripts: 
+            - npm run dockerLogin
+            - npm run dockerTag
+            - npm run dockerPush
         on:
             branch: master
 
