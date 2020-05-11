@@ -3,13 +3,19 @@ language: node_js
 node_js: 12.16.3
 cache: npm
 
-branches:
-    only:
-    - master
+jobs:
+    include:
+        - stage: prepare
+        script: npm install
+        - stage: test
+        script: npm run lint
+        - # stage name not required, will continue to use `test`
+        - stage: deploy
+        script: npm run buildDocker
+        script: npm run dockerLogin
+        script: npm run dockerTag
+        script: npm run dockerPush
 
-# installation
-install: 
-    npm install
 
 # tasks
 # scripts: 
@@ -24,17 +30,3 @@ install:
 #         - npm run dockerPush
 #     on:
 #         branch: master
-
-
-jobs:
-    include:
-        - stage: test
-        script: npm run lint       
-        
-        - stage: deploy
-        # require the branch name to be master (note for PRs this is the base branch name)
-        if: branch = master
-        script: npm run buildDocker
-        script: npm run dockerLogin
-        script: npm run dockerTag
-        script: npm run dockerPush
