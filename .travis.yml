@@ -13,5 +13,5 @@ install:
 script:
   - npm run lint
   - npm run buildDocker
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm; then npm run pushToDockerHub; fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run pushToDockerHub; fi
   
