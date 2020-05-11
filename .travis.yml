@@ -1,27 +1,53 @@
 # language
+# language: node_js
+# node_js: 12.16.3
+# cache: npm
+
+# branches:
+#     only:
+#     - master
+
+# # installation
+# install: 
+#     npm install
+
+# # tasks
+# scripts: 
+#     - npm run lint
+#     - npm run buildDocker
+#     - npm run dockerLogin
+#     - npm run dockerTag
+    
+
+# deploy:
+#     provider: script
+#     script:
+#         - npm run dockerPush
+#     # on:
+    #     branch: master
+
+
 language: node_js
 node_js: 12.16.3
 cache: npm
 
-branches:
-    only:
-    - master
-
-# installation
+# # installation
 install: 
     npm install
-
-# tasks
-scripts: 
+script: 
     - npm run lint
+
+script:
     - npm run buildDocker
-    - npm run dockerLogin
+
+script: 
     - npm run dockerTag
-    
+
+before_deploy:
+    - npm run dockerLogin
 
 deploy:
     provider: script
-    script:
-        - npm run dockerPush
-    # on:
-    #     branch: master
+    script: npm run dockerPush
+    on:
+        branch: master
