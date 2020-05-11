@@ -1,53 +1,18 @@
-# language
-# language: node_js
-# node_js: 12.16.3
-# cache: npm
+# CONFIGURATION
 
-# branches:
-#     only:
-#     - master
-
-# # installation
-# install: 
-#     npm install
-
-# # tasks
-# scripts: 
-#     - npm run lint
-#     - npm run buildDocker
-#     - npm run dockerLogin
-#     - npm run dockerTag
-    
-
-# deploy:
-#     provider: script
-#     script:
-#         - npm run dockerPush
-#     # on:
-    #     branch: master
-
-
+# specify programming language
 language: node_js
-node_js: 12.16.3
+node_js: 10.15.0
 cache: npm
 
-# # installation
-install: 
-    npm install
-script: 
-    - npm run lint
+# installation phase
+install:
+  - npm i
 
+# tasks phase
 script:
-    - npm run buildDocker
-
-script: 
-    - npm run dockerTag
-
-before_deploy:
-    - npm run dockerLogin
-
-deploy:
-    provider: script
-    script: npm run dockerPush
-    on:
-        branch: master
+  - npm run lint
+  - npm run buildDocker
+  - if [ "$TRAVIS_BRANCH" = "master" | "TRAVIS_PULL_REQUEST" = "false" ]; then npm run dockerLogin; fi
+  - if [ "$TRAVIS_BRANCH" = "master" | "TRAVIS_PULL_REQUEST" = "false" ]; then 
+  npm run dockerTag && npm run dockerPush; fi
