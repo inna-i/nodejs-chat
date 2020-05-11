@@ -12,16 +12,29 @@ install:
     npm install
 
 # tasks
-scripts: 
-    - npm run lint
+# scripts: 
+#     - npm run lint
     
 
-deploy:
-    provider: script
-    script: 
-        - npm run buildDocker
-        - npm run dockerLogin
-        - npm run dockerTag
-        - npm run dockerPush
-    on:
-        branch: master
+# deploy:
+#     scripts: 
+#         - npm run buildDocker
+#         - npm run dockerLogin
+#         - npm run dockerTag
+#         - npm run dockerPush
+#     on:
+#         branch: master
+
+
+jobs:
+    include:
+        - stage: test
+        script: npm run lint       
+        
+        - stage: deploy
+        # require the branch name to be master (note for PRs this is the base branch name)
+        if: branch = master
+        script: npm run buildDocker
+        script: npm run dockerLogin
+        script: npm run dockerTag
+        script: npm run dockerPush
