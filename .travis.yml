@@ -3,19 +3,22 @@ language: node_js
 node_js: 12.16.3
 cache: npm
 
-jobs:
-    include:
-        - stage: prepare
-        script: npm install
-        - stage: test
-        script: npm run lint
-        - # stage name not required, will continue to use `test`
-        - stage: deploy
-        script: npm run buildDocker
-        script: npm run dockerLogin
-        script: npm run dockerTag
-        script: npm run dockerPush
 
+install:
+    - npm install
+    
+    jobs:
+        include:
+        - stage: test
+            script: npm run lint
+        - stage: build
+            script: npm run buildDocker
+        - stage: deploy
+            script: npm run dockerLogin
+            script: npm run dockerTag
+            script: npm run dockerPush
+            on:
+                branch: master
 
 # tasks
 # scripts: 
