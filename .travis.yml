@@ -7,18 +7,18 @@ cache: npm
 install:
     - npm install
     
-    jobs:
-        include:
-        - stage: test
-            script: npm run lint
-        - stage: build
-            script: npm run buildDocker
-        - stage: deploy
-            script: npm run dockerLogin
-            script: npm run dockerTag
-            script: npm run dockerPush
-            on:
-                branch: master
+jobs:
+    include:
+    - stage: test
+        script: npm run lint
+    - stage: build
+        script: npm run buildDocker
+    - stage: deploy
+        script: npm run dockerLogin
+        script: npm run dockerTag
+        script: npm run dockerPush
+        on:
+            branch: master
 
 # tasks
 # scripts: 
