@@ -1,26 +1,6 @@
 # CONFIGURATION
 
 # specify programming language
-# language: node_js
-# node_js: 12.16.3
-# cache: npm
-
-
-
-# # tasks phase
-# script:
-#   - npm run lint
-#   - npm run buildDocker
-  
-# deploy:
-#   provider: script
-#   script: 
-#       - npm run pushToDockerHub
-#   on:
-#       branch: master
-
-
-
 language: node_js
 node_js: 12.16.3
 cache: npm
@@ -29,6 +9,7 @@ cache: npm
 install:
   - npm install
 
+# run tasks
 jobs:
   include:
     - name: Run lint
@@ -37,6 +18,6 @@ jobs:
     - name: Build Docker image
       script: npm run buildDocker
 
-    - name: push to Docker Hub
+    - name: Push to Docker Hub
       if: (type = push AND branch = master)
       script: npm run dockerLogin && npm run dockerTag && npm run dockerPush
