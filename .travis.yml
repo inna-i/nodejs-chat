@@ -16,8 +16,6 @@ services:
 install:
   - npm install
 
-before_script:
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
 # run tasks
 jobs:
@@ -28,10 +26,11 @@ jobs:
     - name: Build Docker image
       script: docker build -t localhost:32000/node-web-app:latest . --no-cache
 
-    - name: Tag Docker Image
+    # - name: Tag Docker Image
       # if: (type = push AND branch = master)
       script: docker tag localhost:32000/node-web-app iivashchuk/node-web-app:latest
+      script: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-    - name: Push to Docker Hub
+    # - name: Push to Docker Hub
       # if: (type = push AND branch = master)
       script: docker push $DOCKER_USERNAME/node-web-app:latest
