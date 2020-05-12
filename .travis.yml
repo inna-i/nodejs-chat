@@ -19,12 +19,12 @@ before_script:
 # run tasks
 jobs:
   include:
-    - name: Run lint
-      script: npm run lint
+    name: Run lint
+    script: npm run lint
 
-    - name: Build Docker image
-      script: npm run buildDocker
+    name: Build Docker image
+    script: npm run buildDocker
 
-    - name: Push to Docker Hub
-      if: (type = push AND branch = master)
-      script: npm run buildDocker && npm run dockerTag && npm run dockerPush
+    name: Push to Docker Hub
+    if: (type = push AND branch = master)
+    script: npm run buildDocker && npm run dockerTag && npm run dockerPush
