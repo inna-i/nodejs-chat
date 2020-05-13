@@ -1,4 +1,4 @@
-# RND-Chat
+# NWSD-Chat &middot; ![Build result](https://travis-ci.com/inna-i/nodejs-chat.svg?branch=master)
 
 To build both parts:
 `yarn build`
