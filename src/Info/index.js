@@ -7,7 +7,7 @@ const Ping = () => {
 		fetch('/api')
 			.then(resp => resp.json())
 			.then(resp => setMeta(resp))
-			.catch(() => console.error('fail'));
+			.catch(() => console.error('fail'))
 	}, []);
 
 	return (
