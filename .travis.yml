@@ -9,22 +9,18 @@ branches:
   only: 
     - master
     
-# installation phase
-install:
-  - npm install
-
-# before_script:
-#   - 
-
 # run tasks
 jobs:
   include:
-    - stage: test
-      # - name: Run lint
+    - stage: compile
+      script: npm install
+
+    - stage: lint
       script: npm run lint
 
-    # - name: Build Docker image
-    # - script: npm run buildDocker
+    - stage: test
+      script: npm run test
+
     - stage: deploy
       # - name: Push to Docker Hub
       # if: (type = push AND branch = master)
