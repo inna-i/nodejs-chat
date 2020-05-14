@@ -1,4 +1,4 @@
-# NWSD-Chat &middot; ![Build result](https://travis-ci.com/inna-i/nodejs-chat.svg?branch=master)
+# NWSD-Chat &middot; [![Travis CI Status](https://travis-ci.com/inna-i/nodejs-chat.svg?branch=master)](https://travis-ci.com/github/inna-i/nodejs-chat) 
 
 To build both parts:
 `yarn build`
