@@ -1,15 +1,34 @@
 # NWSD-Chat &middot; [![Travis CI Status](https://travis-ci.com/inna-i/nodejs-chat.svg?branch=master)](https://travis-ci.com/github/inna-i/nodejs-chat) 
 
 To build both parts:
-`yarn build`
+`npm run build`
 
 To start local development:
-`yarn dev`
+`npm run dev`
 
-To build docker image:
-`yarn buildDocker`
+To build Docker image:
+`npm run buildDocker`
 
-To start docker container:
-`yarn runDocker`
+To start Docker container:
+`npm run runDocker`
 
 Please find Kubernetes project here: https://github.com/vyshkov/scaling-nwsd-chat
+
+To build and push Docker image to your own Docker Hub: 
+
+- add credentials in .env file:
+    ```
+    DOCKER_USERNAME=userName
+    DOCKER_PASSWORD=userPassword
+    ```
+- login into Docker Hub
+    `npm run dockerLoginLocal`
+ 
+- tag your image (first should be built)
+    `npm run dockerTag`
+
+- push the image
+    `npm run dockerPush`
+
+**Note:** instead of `npm run` you can use `yarn`
+
