@@ -14,7 +14,7 @@ To start Docker container:
 
 Please find Kubernetes project here: https://github.com/vyshkov/scaling-nwsd-chat
 
-To build and push Docker image to your own Docker Hub: 
+To build and push Docker image to your own Docker Hub from your local machine: 
 
 - add credentials in .env file:
     ```
@@ -25,10 +25,10 @@ To build and push Docker image to your own Docker Hub:
     `npm run dockerLoginLocal`
  
 - tag your image (first should be built)
-    `npm run dockerTag`
+    `npm run dockerTagLocal`
 
 - push the image
-    `npm run dockerPush`
+    `npm run dockerPushLocal`
 
 **Note:** instead of `npm run` you can use `yarn`
 
