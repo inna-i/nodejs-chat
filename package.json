@@ -48,7 +48,7 @@
     "dockerTagLocal": "docker tag localhost:32000/node-web-app $(grep DOCKER_USERNAME .env | cut -d '=' -f2)/node-web-app:latest",
     "dockerPushLocal": "docker push $(grep DOCKER_USERNAME .env | cut -d '=' -f2)/node-web-app:latest",
     "dockerLogin": "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin",
-    "dockerTag": "docker tag localhost:32000/node-web-app $DOCKER_PASSWORD/node-web-app:latest",
+    "dockerTag": "docker tag localhost:32000/node-web-app $DOCKER_USERNAME/node-web-app:latest",
     "dockerPush": "docker push $DOCKER_USERNAME/node-web-app:latest",
     "pushToDockerHub": "npm run dockerLogin && npm run dockerTag && npm run dockerPush",
     "helm_kafka": "helm install --name my-kafka --namespace kafka -f 100-helm-k.yaml incubator/kafka",
