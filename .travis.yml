@@ -8,7 +8,7 @@ cache: npm
 # run tasks
 jobs:
   include:
-    - stage: compile
+    - stage: install
       script: npm install
 
     - stage: lint
