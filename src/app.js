@@ -28,11 +28,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => [
-    <GlobalStyle key="global-style" />,
-    <Switch key="router">
-        <Route exact path="/" render={(props) => <Chat />} />
-        <Route path="/info" render={(props) => <Info />} />
-    </Switch>,
+	<GlobalStyle key="global-style" />,
+	<Switch key="router">
+		<Route exact path="/" render={props => <Chat />} />
+		<Route path="/info" render={props => <Info />} />
+	</Switch>,
 ];
 
 export default App;
